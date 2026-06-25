@@ -3,98 +3,549 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="حصّتي — منصة موريتانية لحجز دروس خصوصية. تواصل مع أفضل الأساتذة وابدأ رحلتك التعليمية." />
   <title>حصّتي — منصة حجز دروس خصوصية</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-      background: #F8FAFC;
-      color: #1E293B;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    header {
-      background: linear-gradient(135deg, #1B6B7A 0%, #0F4C5C 100%);
-      color: #fff;
-      padding: 80px 24px;
-      text-align: center;
-    }
-    header .logo {
-      width: 100px; height: 100px;
-      background: rgba(255,255,255,.15);
-      border-radius: 26px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 52px;
-      margin-bottom: 20px;
-    }
-    header h1 { font-size: 32px; font-weight: 800; margin-bottom: 10px; }
-    header p  { font-size: 16px; color: rgba(255,255,255,.8); max-width: 480px; margin: 0 auto; }
 
-    .links {
-      max-width: 600px;
-      margin: 48px auto;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    :root {
+      --primary:     #1B6B7A;
+      --primary-dk:  #0F4C5C;
+      --accent:      #7BE0C0;
+      --text:        #1E293B;
+      --text-muted:  #64748B;
+      --bg:          #F8FAFC;
+      --white:       #ffffff;
+      --border:      #E2E8F0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 16px;
     }
-    @media (max-width: 480px) { .links { grid-template-columns: 1fr; } }
-
-    .link-card {
-      background: #fff;
-      border: 1px solid #E2E8F0;
-      border-radius: 16px;
-      padding: 28px;
-      text-align: center;
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
       text-decoration: none;
-      color: #1E293B;
+    }
+    .nav-logo {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dk));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .nav-brand span {
+      font-size: 20px; font-weight: 800; color: var(--primary);
+    }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-links a {
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 14px; font-weight: 600;
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: all .15s;
+    }
+    .nav-links a:hover { background: var(--bg); color: var(--primary); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(155deg, var(--primary-dk) 0%, var(--primary) 55%, #1B8A7A 100%);
+      color: var(--white);
+      padding: 90px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-inner { position: relative; max-width: 680px; margin: 0 auto; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 13px; font-weight: 600;
+      margin-bottom: 28px;
+    }
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 1.6s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .6; transform: scale(1.4); }
+    }
+
+    .hero-logo {
+      width: 100px; height: 100px;
+      background: rgba(255,255,255,.12);
+      border: 2px solid rgba(255,255,255,.2);
+      border-radius: 28px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 54px;
+      margin-bottom: 28px;
+      box-shadow: 0 16px 48px rgba(0,0,0,.2);
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 6vw, 48px);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 18px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero p {
+      font-size: clamp(15px, 3vw, 18px);
+      color: rgba(255,255,255,.8);
+      max-width: 500px;
+      margin: 0 auto 36px;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent);
+      color: #0F4C5C;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-size: 15px; font-weight: 800;
+      text-decoration: none;
+      transition: all .2s;
+      box-shadow: 0 4px 20px rgba(123,224,192,.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(123,224,192,.5); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.25);
+      color: var(--white);
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none;
       transition: all .2s;
     }
-    .link-card:hover {
-      border-color: #1B6B7A;
-      box-shadow: 0 4px 20px rgba(27,107,122,.15);
-      transform: translateY(-2px);
-    }
-    .link-card .icon { font-size: 40px; display: block; margin-bottom: 12px; }
-    .link-card h2   { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: #1B6B7A; }
-    .link-card p    { font-size: 13px; color: #64748B; }
+    .btn-ghost:hover { background: rgba(255,255,255,.2); }
 
-    footer {
-      margin-top: auto;
+    .hero-stats {
+      display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+      margin-top: 52px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,.15);
+    }
+    .stat { text-align: center; }
+    .stat .num { font-size: 28px; font-weight: 800; color: var(--accent); }
+    .stat .lbl { font-size: 13px; color: rgba(255,255,255,.65); margin-top: 2px; }
+
+    /* ── FEATURES ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    .section-label {
+      display: inline-block;
+      background: #E6F4F7;
+      color: var(--primary);
+      border-radius: 999px;
+      padding: 5px 16px;
+      font-size: 13px; font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .section h2 {
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .section .sub {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 520px;
+      margin-bottom: 52px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      transition: all .2s;
+    }
+    .feature-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 8px 32px rgba(27,107,122,.1);
+      transform: translateY(-3px);
+    }
+    .feature-icon {
+      width: 52px; height: 52px;
+      border-radius: 15px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
+    .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p  { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── HOW IT WORKS ── */
+    .steps-section { background: var(--white); }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 36px; right: 0; left: 0;
+      height: 2px;
+      background: linear-gradient(to left, transparent, var(--primary) 20%, var(--primary) 80%, transparent);
+      opacity: .15;
+    }
+    .step {
       text-align: center;
-      padding: 24px;
+      padding: 24px 20px;
+      position: relative;
+    }
+    .step-num {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dk));
+      color: var(--white);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 18px;
+      position: relative;
+      box-shadow: 0 8px 24px rgba(27,107,122,.25);
+    }
+    .step h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .step p  { font-size: 13.5px; color: var(--text-muted); }
+
+    /* ── FOR TEACHERS ── */
+    .teacher-section {
+      background: linear-gradient(135deg, var(--primary-dk), var(--primary));
+      color: var(--white);
+    }
+    .teacher-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 80px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    @media (max-width: 700px) { .teacher-inner { grid-template-columns: 1fr; } }
+    .teacher-inner h2 { font-size: clamp(22px, 4vw, 34px); font-weight: 800; margin-bottom: 16px; }
+    .teacher-inner p  { color: rgba(255,255,255,.8); font-size: 15px; line-height: 1.8; margin-bottom: 24px; }
+    .teacher-perks { display: flex; flex-direction: column; gap: 14px; }
+    .perk {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 14.5px; font-weight: 600;
+    }
+    .perk .ico { font-size: 22px; flex-shrink: 0; }
+    .teacher-visual {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    .mini-card {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+    .mini-card .val { font-size: 26px; font-weight: 800; color: var(--accent); }
+    .mini-card .key { font-size: 12px; color: rgba(255,255,255,.65); margin-top: 4px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0F1E24;
+      color: rgba(255,255,255,.6);
+      padding: 48px 24px 32px;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+    }
+    @media (max-width: 600px) { .footer-inner { grid-template-columns: 1fr; } }
+    .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .footer-brand .logo {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dk));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .footer-brand span { font-size: 18px; font-weight: 800; color: var(--white); }
+    footer p { font-size: 13.5px; line-height: 1.7; }
+    .footer-col h4 { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 14px; }
+    .footer-col a {
+      display: block; font-size: 13.5px;
+      color: rgba(255,255,255,.55);
+      text-decoration: none; margin-bottom: 8px;
+      transition: color .15s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      max-width: 1100px; margin: 36px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
       font-size: 12px;
-      color: #94A3B8;
-      border-top: 1px solid #E2E8F0;
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero { padding: 64px 20px 56px; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">📚</div>
-  <h1>حصّتي</h1>
-  <p>منصة حجز دروس خصوصية — تواصل مع أفضل الأساتذة</p>
-</header>
+<!-- ── NAV ────────────────────────────────────────── -->
+<nav>
+  <a href="#" class="nav-brand">
+    <div class="nav-logo">📚</div>
+    <span>حصّتي</span>
+  </a>
+  <div class="nav-links">
+    <a href="#features">المميزات</a>
+    <a href="#how">كيف يعمل</a>
+    <a href="#teachers">للأساتذة</a>
+    <a href="support.html">الدعم</a>
+  </div>
+</nav>
 
-<div class="links">
-  <a href="privacy.html" class="link-card">
-    <span class="icon">🔒</span>
-    <h2>سياسة الخصوصية</h2>
-    <p>كيف نحمي بياناتك ونحافظ على خصوصيتك</p>
-  </a>
-  <a href="support.html" class="link-card">
-    <span class="icon">🎓</span>
-    <h2>الدعم الفني</h2>
-    <p>مركز المساعدة والأسئلة الشائعة</p>
-  </a>
+<!-- ── HERO ────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      متاح الآن على iOS و Android
+    </div>
+
+    <div class="hero-logo">📚</div>
+
+    <h1>تعلّم بذكاء مع <em>حصّتي</em></h1>
+    <p>
+      منصة موريتانية تربط الطلاب بأفضل الأساتذة الخصوصيين —
+      احجز جلستك، ادفع بأمان، وتعلّم من المنزل.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#" class="btn-primary">
+        🍎 &nbsp; تحميل على App Store
+      </a>
+      <a href="support.html" class="btn-ghost">
+        💬 &nbsp; تواصل معنا
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="num">100+</div>
+        <div class="lbl">أستاذ معتمد</div>
+      </div>
+      <div class="stat">
+        <div class="num">20+</div>
+        <div class="lbl">مادة دراسية</div>
+      </div>
+      <div class="stat">
+        <div class="num">500+</div>
+        <div class="lbl">طالب مسجّل</div>
+      </div>
+      <div class="stat">
+        <div class="num">4.8 ⭐</div>
+        <div class="lbl">تقييم التطبيق</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ────────────────────────────────────── -->
+<div id="features" class="section">
+  <span class="section-label">✨ مميزات المنصة</span>
+  <h2>كل ما تحتاجه في مكان واحد</h2>
+  <p class="sub">منصة متكاملة لتجربة تعليمية سلسة وآمنة بين الطلاب والأساتذة</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#E6F4F7;">🔍</div>
+      <h3>ابحث عن الأستاذ المناسب</h3>
+      <p>تصفّح قائمة أساتذة معتمدين مع تقييماتهم وتخصصاتهم وأسعارهم. اختر من يناسبك بكل سهولة.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#EDE9FE;">📅</div>
+      <h3>احجز بنقرة واحدة</h3>
+      <p>اختر الموعد المناسب وأرسل طلب الحجز. يصلك رد الأستاذ فوراً عبر الإشعارات.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#D1FAE5;">💳</div>
+      <h3>دفع آمن ومتعدد الوسائل</h3>
+      <p>ادفع عبر بنكيلي، مصرفي، سداد أو نقداً. تُحفظ مدفوعاتك بأمان ويتحقق منها فريق الإدارة.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#FEF3C7;">🎥</div>
+      <h3>جلسة تفاعلية مباشرة</h3>
+      <p>شات مدمج مع دعم الصور والملفات والتسجيلات الصوتية، ومكالمة فيديو عالية الجودة.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#FEE2E2;">📚</div>
+      <h3>دروس مسجّلة ودورات</h3>
+      <p>اشترك في الدورات واستمتع بمحتوى تعليمي متنوع يمكنك مشاهدته في أي وقت.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#E6F4F7;">⭐</div>
+      <h3>تقييمات موثوقة</h3>
+      <p>بعد كل جلسة، قيّم الأستاذ وشارك تجربتك. التقييمات الحقيقية تساعد الجميع على الاختيار.</p>
+    </div>
+  </div>
 </div>
 
+<!-- ── HOW IT WORKS ─────────────────────────────────── -->
+<div id="how" class="steps-section">
+  <div class="section">
+    <span class="section-label">🚀 كيف يعمل</span>
+    <h2>ابدأ رحلتك في 4 خطوات</h2>
+    <p class="sub">سهل، سريع، وآمن — من التسجيل حتى الجلسة الأولى في دقائق</p>
+
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">👤</div>
+        <h3>سجّل حسابك</h3>
+        <p>أنشئ حسابك بسهولة باستخدام رقم هاتفك ورمز التحقق</p>
+      </div>
+      <div class="step">
+        <div class="step-num">🔍</div>
+        <h3>ابحث عن أستاذ</h3>
+        <p>تصفّح الأساتذة حسب المادة والسعر والتقييم</p>
+      </div>
+      <div class="step">
+        <div class="step-num">📅</div>
+        <h3>احجز الموعد</h3>
+        <p>اختر الوقت المناسب وأكمل عملية الدفع بأمان</p>
+      </div>
+      <div class="step">
+        <div class="step-num">🎓</div>
+        <h3>ابدأ التعلّم</h3>
+        <p>انضم إلى الجلسة وتفاعل مع الأستاذ مباشرةً</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOR TEACHERS ─────────────────────────────────── -->
+<div id="teachers" class="teacher-section">
+  <div class="teacher-inner">
+    <div>
+      <span style="display:inline-block; background:rgba(255,255,255,.15); border-radius:999px; padding:5px 16px; font-size:13px; font-weight:700; margin-bottom:16px;">
+        👨‍🏫 للأساتذة
+      </span>
+      <h2>حوّل خبرتك إلى دخل مستدام</h2>
+      <p>
+        انضم إلى مجتمع الأساتذة على حصّتي وابدأ في استقبال طلاب من جميع أنحاء موريتانيا.
+        تحكم في جدولك وأسعارك واكسب أموالاً تحول إليك مباشرةً.
+      </p>
+      <div class="teacher-perks">
+        <div class="perk"><span class="ico">💰</span> حدّد سعرك بنفسك — لا عمولة مخفية</div>
+        <div class="perk"><span class="ico">📆</span> جدولك بيدك — العمل متى تريد</div>
+        <div class="perk"><span class="ico">📊</span> لوحة أرباح واضحة ومفصّلة</div>
+        <div class="perk"><span class="ico">🚀</span> وصول لمئات الطلاب من لحظة التسجيل</div>
+      </div>
+    </div>
+    <div class="teacher-visual">
+      <div class="mini-card">
+        <div class="val">85%</div>
+        <div class="key">صافي أرباح الأستاذ</div>
+      </div>
+      <div class="mini-card">
+        <div class="val">24h</div>
+        <div class="key">سرعة تحويل المستحقات</div>
+      </div>
+      <div class="mini-card">
+        <div class="val">∞</div>
+        <div class="key">عدد الجلسات بلا حدود</div>
+      </div>
+      <div class="mini-card">
+        <div class="val">✓</div>
+        <div class="key">دعم فني متواصل</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ────────────────────────────────────────── -->
 <footer>
-  © 2026 حصّتي — جميع الحقوق محفوظة
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">
+        <div class="logo">📚</div>
+        <span>حصّتي</span>
+      </div>
+      <p>منصة موريتانية لحجز الدروس الخصوصية — نربط الطلاب بأفضل الأساتذة لتجربة تعليمية مميزة وآمنة.</p>
+      <p style="margin-top:12px;">
+        📧 <a href="mailto:ahmedelkentawi@gmail.com" style="color:rgba(255,255,255,.55); text-decoration:none;">ahmedelkentawi@gmail.com</a>
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>الصفحات</h4>
+      <a href="#features">المميزات</a>
+      <a href="#how">كيف يعمل</a>
+      <a href="#teachers">للأساتذة</a>
+    </div>
+    <div class="footer-col">
+      <h4>قانوني ودعم</h4>
+      <a href="privacy.html">سياسة الخصوصية</a>
+      <a href="support.html">الدعم الفني</a>
+      <a href="support.html#faq">الأسئلة الشائعة</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 حصّتي — جميع الحقوق محفوظة</span>
+    <span>صُنع بـ ❤️ في موريتانيا</span>
+  </div>
 </footer>
 
 </body>
