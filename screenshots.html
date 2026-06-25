@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>حصّتي — App Store Screenshots</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  .dl-btn {
+    margin-top: 12px;
+    background: #7BE0C0;
+    color: #0D3D47;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 22px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: opacity .2s;
+  }
+  .dl-btn:hover { opacity: .85; }
+  .dl-btn:active { opacity: .7; }
+  .dl-btn:disabled { opacity: .4; cursor: wait; }
+</style>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111;
+    font-family: -apple-system, 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 40px;
+    justify-content: center;
+  }
+
+  /* ── Phone shell ── */
+  .phone-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .phone-label {
+    color: #888;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .phone {
+    width: 320px;
+    height: 692px;
+    background: #0a0a0a;
+    border-radius: 48px;
+    border: 10px solid #1a1a1a;
+    box-shadow:
+      inset 0 0 0 2px #333,
+      0 30px 80px rgba(0,0,0,.7),
+      0 0 0 1px #000;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  /* dynamic island */
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 96px;
+    height: 30px;
+    background: #0a0a0a;
+    border-radius: 999px;
+    z-index: 100;
+  }
+  /* side buttons */
+  .phone::after {
+    content: '';
+    position: absolute;
+    right: -14px;
+    top: 80px;
+    width: 4px;
+    height: 60px;
+    background: #222;
+    border-radius: 0 2px 2px 0;
+    box-shadow: 0 72px 0 #222;
+  }
+  .screen {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 40px;
+  }
+
+  /* ══════════════════════════════════════════
+     SCREEN 1 — Splash / Hero
+  ══════════════════════════════════════════ */
+  .s1 {
+    background: linear-gradient(160deg, #1B6B7A 0%, #0D3D47 55%, #071E23 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px 40px;
+    text-align: center;
+  }
+  .s1 .logo-box {
+    width: 90px; height: 90px;
+    background: rgba(123,224,192,.15);
+    border-radius: 28px;
+    border: 2px solid rgba(123,224,192,.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 44px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 40px rgba(123,224,192,.2);
+  }
+  .s1 .app-name {
+    font-size: 38px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+  .s1 .app-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,.6);
+    margin-bottom: 48px;
+  }
+  .s1 .badge-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+  .s1 .badge {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 11px;
+    color: #7BE0C0;
+    font-weight: 600;
+  }
+  .s1 .btn-big {
+    width: 100%;
+    background: #7BE0C0;
+    color: #0D3D47;
+    border-radius: 16px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .s1 .btn-outline {
+    width: 100%;
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,.25);
+    border-radius: 16px;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,.8);
+  }
+  .s1 .dots {
+    display: flex; gap: 6px; margin-top: 28px;
+  }
+  .s1 .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,.25);
+  }
+  .s1 .dot.active { background: #7BE0C0; width: 20px; border-radius: 3px; }
+
+  /* ══════════════════════════════════════════
+     SCREEN 2 — Teacher List
+  ══════════════════════════════════════════ */
+  .s2 {
+    background: #F0F4F6;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 0 0;
+  }
+  .s2 .top-bar {
+    background: #fff;
+    padding: 10px 18px 14px;
+    border-bottom: 1px solid #E8EDF0;
+  }
+  .s2 .top-bar .greeting {
+    font-size: 11px; color: #9DB5BE;
+  }
+  .s2 .top-bar .name {
+    font-size: 18px; font-weight: 800; color: #1E293B;
+  }
+  .s2 .search {
+    background: #F0F4F6;
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin: 12px 18px 0;
+    font-size: 12px;
+    color: #94A3B8;
+    display: flex; align-items: center; gap: 8px;
+    border: 1px solid #E2E8F0;
+  }
+  .s2 .section-title {
+    padding: 14px 18px 8px;
+    font-size: 13px; font-weight: 700; color: #1E293B;
+  }
+  .s2 .chips {
+    display: flex; gap: 8px; padding: 0 18px 12px; overflow: hidden;
+  }
+  .s2 .chip {
+    background: #1B6B7A; color: #fff;
+    border-radius: 999px; padding: 6px 14px;
+    font-size: 11px; font-weight: 600; white-space: nowrap;
+  }
+  .s2 .chip.off { background: #fff; color: #64748B; border: 1px solid #E2E8F0; }
+  .s2 .card {
+    background: #fff;
+    margin: 0 14px 10px;
+    border-radius: 16px;
+    padding: 14px;
+    display: flex; gap: 12px;
+    border: 1px solid #E8EDF0;
+  }
+  .s2 .avatar {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 800; color: #fff;
+    flex-shrink: 0;
+  }
+  .s2 .card-info { flex: 1; }
+  .s2 .card-name { font-size: 13px; font-weight: 700; color: #1E293B; }
+  .s2 .card-subject { font-size: 11px; color: #64748B; margin: 2px 0 6px; }
+  .s2 .card-row { display: flex; gap: 8px; align-items: center; }
+  .s2 .stars { font-size: 10px; color: #F59E0B; }
+  .s2 .price { font-size: 12px; font-weight: 700; color: #1B6B7A; margin-right: auto; }
+  .s2 .btn-book {
+    background: #1B6B7A; color: #fff;
+    border-radius: 10px; padding: 8px 14px;
+    font-size: 11px; font-weight: 700;
+    align-self: center;
+  }
+
+  /* ══════════════════════════════════════════
+     SCREEN 3 — Booking Steps
+  ══════════════════════════════════════════ */
+  .s3 {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 0 0;
+  }
+  .s3 .hdr {
+    background: linear-gradient(135deg, #1B6B7A, #0F4C5C);
+    padding: 18px 20px 24px;
+    margin: 0 0 20px;
+  }
+  .s3 .hdr-title { font-size: 16px; font-weight: 800; color: #fff; }
+  .s3 .hdr-sub { font-size: 11px; color: rgba(255,255,255,.7); margin-top: 3px; }
+  .s3 .step-wrap { padding: 0 18px; }
+  .s3 .step {
+    display: flex; gap: 14px; align-items: flex-start; margin-bottom: 20px;
+  }
+  .s3 .step-num {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #1B6B7A, #7BE0C0);
+    border-radius: 50%; color: #fff;
+    font-size: 15px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .s3 .step-icon {
+    width: 36px; height: 36px;
+    background: #F0F9F7;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .s3 .step-text h4 { font-size: 13px; font-weight: 700; color: #1E293B; margin-bottom: 3px; }
+  .s3 .step-text p { font-size: 11px; color: #64748B; line-height: 1.5; }
+  .s3 .divider { width: 2px; height: 14px; background: #E2E8F0; margin: 0 0 6px 17px; }
+  .s3 .confirm-box {
+    margin: 8px 18px 16px;
+    background: linear-gradient(135deg, #E6F4F7, #D0EEF3);
+    border-radius: 14px;
+    padding: 14px;
+    border: 1px solid #A8D8E0;
+  }
+  .s3 .confirm-box .label { font-size: 10px; color: #1B6B7A; font-weight: 700; margin-bottom: 6px; }
+  .s3 .confirm-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .s3 .confirm-key { font-size: 11px; color: #64748B; }
+  .s3 .confirm-val { font-size: 11px; color: #1E293B; font-weight: 600; }
+  .s3 .big-btn {
+    margin: 0 18px;
+    background: #1B6B7A; color: #fff;
+    border-radius: 14px; padding: 15px;
+    font-size: 14px; font-weight: 800;
+    text-align: center;
+  }
+
+  /* ══════════════════════════════════════════
+     SCREEN 4 — Live Session / Video
+  ══════════════════════════════════════════ */
+  .s4 {
+    background: #0D1B1E;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 0 0;
+    position: relative;
+  }
+  .s4 .status-bar { display: flex; justify-content: space-between; padding: 6px 18px; }
+  .s4 .live-badge {
+    background: #EF4444; color: #fff;
+    border-radius: 999px; padding: 3px 10px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .s4 .live-badge::before {
+    content: ''; width: 6px; height: 6px;
+    background: #fff; border-radius: 50%;
+    animation: pulse 1s infinite;
+  }
+  .s4 .timer { font-size: 13px; color: rgba(255,255,255,.7); font-weight: 600; }
+  .s4 .video-area {
+    margin: 10px 14px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    height: 300px;
+    background: linear-gradient(160deg, #1B3A40 0%, #0D2429 100%);
+    border: 1px solid rgba(123,224,192,.15);
+  }
+  .s4 .teacher-video {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px;
+  }
+  .s4 .teacher-avatar {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, #1B6B7A, #7BE0C0);
+    border-radius: 22px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px; font-weight: 800; color: #fff;
+    border: 3px solid rgba(123,224,192,.3);
+  }
+  .s4 .teacher-name { font-size: 14px; color: #fff; font-weight: 700; }
+  .s4 .teacher-sub { font-size: 11px; color: rgba(123,224,192,.8); }
+  .s4 .student-pip {
+    position: absolute; bottom: 12px; left: 12px;
+    width: 70px; height: 90px;
+    background: linear-gradient(135deg, #0F4C5C, #1B6B7A);
+    border-radius: 12px;
+    border: 2px solid rgba(123,224,192,.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+  .s4 .controls {
+    display: flex; justify-content: center; gap: 16px;
+    padding: 18px;
+  }
+  .s4 .ctrl-btn {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    border: 1px solid rgba(255,255,255,.15);
+  }
+  .s4 .ctrl-btn.red { background: #EF4444; border-color: #EF4444; }
+  .s4 .chat-preview {
+    margin: 0 14px;
+    background: rgba(255,255,255,.05);
+    border-radius: 14px;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,.08);
+  }
+  .s4 .chat-title { font-size: 10px; color: rgba(255,255,255,.4); margin-bottom: 8px; font-weight: 600; }
+  .s4 .msg { font-size: 10px; color: rgba(255,255,255,.7); margin-bottom: 5px; }
+  .s4 .msg span { color: #7BE0C0; font-weight: 600; }
+
+  /* ══════════════════════════════════════════
+     SCREEN 5 — Teacher Dashboard / Earnings
+  ══════════════════════════════════════════ */
+  .s5 {
+    background: #F0F4F6;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 0 0;
+  }
+  .s5 .hdr {
+    background: linear-gradient(135deg, #0F3D47 0%, #1B6B7A 100%);
+    padding: 18px 18px 28px;
+  }
+  .s5 .hdr-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .s5 .hdr-title { font-size: 15px; font-weight: 800; color: #fff; }
+  .s5 .notif { font-size: 20px; }
+  .s5 .balance-label { font-size: 10px; color: rgba(255,255,255,.6); margin-bottom: 4px; }
+  .s5 .balance { font-size: 32px; font-weight: 900; color: #fff; }
+  .s5 .balance span { font-size: 14px; color: #7BE0C0; margin-right: 6px; }
+  .s5 .stats-row {
+    display: flex; gap: 10px; padding: 14px 14px 0;
+  }
+  .s5 .stat-card {
+    flex: 1; background: #fff; border-radius: 14px;
+    padding: 12px; border: 1px solid #E8EDF0;
+    text-align: center;
+  }
+  .s5 .stat-val { font-size: 16px; font-weight: 800; color: #1B6B7A; }
+  .s5 .stat-lbl { font-size: 10px; color: #94A3B8; margin-top: 2px; }
+  .s5 .section { padding: 14px 14px 0; }
+  .s5 .sec-title { font-size: 12px; font-weight: 700; color: #1E293B; margin-bottom: 10px; }
+  .s5 .req-card {
+    background: #fff; border-radius: 14px;
+    padding: 13px; margin-bottom: 8px;
+    border: 1px solid #E8EDF0;
+    display: flex; gap: 10px; align-items: center;
+  }
+  .s5 .req-icon {
+    width: 38px; height: 38px;
+    border-radius: 12px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .s5 .req-info { flex: 1; }
+  .s5 .req-name { font-size: 12px; font-weight: 700; color: #1E293B; }
+  .s5 .req-sub { font-size: 10px; color: #64748B; }
+  .s5 .req-badge {
+    border-radius: 999px; padding: 4px 10px;
+    font-size: 10px; font-weight: 700;
+  }
+  .s5 .new { background: #E6F4F7; color: #1B6B7A; }
+  .s5 .done { background: #D1FAE5; color: #059669; }
+
+  /* ══════════════════════════════════════════
+     MARKETING OVERLAYS (outside phone)
+  ══════════════════════════════════════════ */
+  .marketing {
+    text-align: center;
+    max-width: 280px;
+  }
+  .mktg-tag {
+    display: inline-block;
+    background: #7BE0C0;
+    color: #0D3D47;
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .mktg-h {
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .mktg-p {
+    font-size: 12px;
+    color: rgba(255,255,255,.55);
+    line-height: 1.6;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .4; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ SCREENSHOT 1 ═══ -->
+<div class="phone-wrap" id="sc1">
+  <div class="phone">
+    <div class="screen s1">
+      <div class="logo-box">🎓</div>
+      <div class="app-name">حصّتي</div>
+      <div class="app-sub">منصة الدروس الخصوصية</div>
+      <div class="badge-row">
+        <div class="badge">🇲🇷 موريتانيا</div>
+        <div class="badge">عربي · Français</div>
+      </div>
+      <div class="btn-big">ابدأ كطالب</div>
+      <div class="btn-outline">أنا أستاذ →</div>
+      <div class="dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+  <div class="marketing">
+    <div class="mktg-tag">حصّتي</div>
+    <div class="mktg-h">منصة التعليم<br>الأولى في موريتانيا</div>
+    <div class="mktg-p">للطلاب والأساتذة<br>بالعربية والفرنسية</div>
+  </div>
+  <button class="dl-btn" onclick="dl('sc1','hessati_screenshot_1')">⬇ تحميل PNG</button>
+</div>
+
+<!-- ═══ SCREENSHOT 2 ═══ -->
+<div class="phone-wrap" id="sc2">
+  <div class="phone">
+    <div class="screen s2">
+      <div class="top-bar">
+        <div class="greeting">مرحباً 👋</div>
+        <div class="name">ابحث عن أستاذك</div>
+      </div>
+      <div class="search">🔍 &nbsp; ابحث بالاسم أو المادة…</div>
+      <div class="section-title">المواد الدراسية</div>
+      <div class="chips">
+        <div class="chip">الكل</div>
+        <div class="chip off">رياضيات</div>
+        <div class="chip off">فيزياء</div>
+        <div class="chip off">عربية</div>
+      </div>
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="avatar" style="background:linear-gradient(135deg,#1B6B7A,#7BE0C0)">م</div>
+        <div class="card-info">
+          <div class="card-name">د. محمد الأمين</div>
+          <div class="card-subject">رياضيات · 7D · 7C</div>
+          <div class="card-row">
+            <div class="stars">★★★★★</div>
+            <div style="font-size:10px;color:#64748B">4.9 (32)</div>
+            <div class="price">500 أوقية</div>
+          </div>
+        </div>
+        <div class="btn-book">احجز</div>
+      </div>
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="avatar" style="background:linear-gradient(135deg,#7B61FF,#A78BFA)">ف</div>
+        <div class="card-info">
+          <div class="card-name">أ. فاطمة محمود</div>
+          <div class="card-subject">فيزياء · 6C · 5C</div>
+          <div class="card-row">
+            <div class="stars">★★★★★</div>
+            <div style="font-size:10px;color:#64748B">4.7 (18)</div>
+            <div class="price">450 أوقية</div>
+          </div>
+        </div>
+        <div class="btn-book">احجز</div>
+      </div>
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="avatar" style="background:linear-gradient(135deg,#059669,#34D399)">أ</div>
+        <div class="card-info">
+          <div class="card-name">أ. أحمد ولد سيدي</div>
+          <div class="card-subject">لغة عربية · كل المستويات</div>
+          <div class="card-row">
+            <div class="stars">★★★★☆</div>
+            <div style="font-size:10px;color:#64748B">4.5 (41)</div>
+            <div class="price">400 أوقية</div>
+          </div>
+        </div>
+        <div class="btn-book">احجز</div>
+      </div>
+    </div>
+  </div>
+  <div class="marketing">
+    <div class="mktg-tag">اختر بحرية</div>
+    <div class="mktg-h">أفضل الأساتذة<br>في متناول يدك</div>
+    <div class="mktg-p">تصفّح حسب المادة<br>والمستوى والسعر والتقييم</div>
+  </div>
+  <button class="dl-btn" onclick="dl('sc2','hessati_screenshot_2')">⬇ تحميل PNG</button>
+</div>
+
+<!-- ═══ SCREENSHOT 3 ═══ -->
+<div class="phone-wrap" id="sc3">
+  <div class="phone">
+    <div class="screen s3">
+      <div class="hdr">
+        <div class="hdr-title">احجز جلستك</div>
+        <div class="hdr-sub">مع د. محمد الأمين · رياضيات</div>
+      </div>
+      <div class="step-wrap">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <h4>اختر الموعد</h4>
+            <p>حدّد اليوم والوقت المناسب من جدول الأستاذ</p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <h4>ارسل إثبات الدفع</h4>
+            <p>حوّل المبلغ وارفع صورة الإيصال</p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <h4>ادخل الجلسة</h4>
+            <p>في الموعد المحدد ادخل الجلسة المباشرة</p>
+          </div>
+        </div>
+      </div>
+      <div class="confirm-box">
+        <div class="label">ملخص الحجز</div>
+        <div class="confirm-row"><span class="confirm-key">المادة</span><span class="confirm-val">رياضيات</span></div>
+        <div class="confirm-row"><span class="confirm-key">الموعد</span><span class="confirm-val">الأحد 10:00 ص</span></div>
+        <div class="confirm-row"><span class="confirm-key">المدة</span><span class="confirm-val">60 دقيقة</span></div>
+        <div class="confirm-row"><span class="confirm-key">السعر</span><span class="confirm-val" style="color:#1B6B7A;font-weight:800">500 أوقية</span></div>
+      </div>
+      <div style="height:12px"></div>
+      <div class="big-btn">تأكيد الحجز ←</div>
+    </div>
+  </div>
+  <div class="marketing">
+    <div class="mktg-tag">سهل وسريع</div>
+    <div class="mktg-h">احجز جلستك<br>في 3 خطوات فقط</div>
+    <div class="mktg-p">اختر الموعد · ادفع · ادخل</div>
+  </div>
+  <button class="dl-btn" onclick="dl('sc3','hessati_screenshot_3')">⬇ تحميل PNG</button>
+</div>
+
+<!-- ═══ SCREENSHOT 4 ═══ -->
+<div class="phone-wrap" id="sc4">
+  <div class="phone">
+    <div class="screen s4">
+      <div class="status-bar">
+        <div class="live-badge">LIVE</div>
+        <div class="timer">⏱ 23:47</div>
+      </div>
+      <div class="video-area">
+        <div class="teacher-video">
+          <div class="teacher-avatar">م</div>
+          <div class="teacher-name">د. محمد الأمين</div>
+          <div class="teacher-sub">رياضيات · 7D</div>
+        </div>
+        <div class="student-pip">👤</div>
+      </div>
+      <div class="controls">
+        <div class="ctrl-btn">🎤</div>
+        <div class="ctrl-btn">📷</div>
+        <div class="ctrl-btn red">📵</div>
+        <div class="ctrl-btn">💬</div>
+        <div class="ctrl-btn">⋯</div>
+      </div>
+      <div class="chat-preview">
+        <div class="chat-title">المحادثة</div>
+        <div class="msg"><span>الأستاذ:</span> هل فهمت المسألة؟</div>
+        <div class="msg"><span>أنت:</span> نعم، شكراً جزيلاً!</div>
+      </div>
+    </div>
+  </div>
+  <div class="marketing">
+    <div class="mktg-tag">مباشر الآن</div>
+    <div class="mktg-h">جلسات فيديو<br>مباشرة مدمجة</div>
+    <div class="mktg-p">تواصل مع أستاذك<br>بالصوت والصورة والدردشة</div>
+  </div>
+  <button class="dl-btn" onclick="dl('sc4','hessati_screenshot_4')">⬇ تحميل PNG</button>
+</div>
+
+<!-- ═══ SCREENSHOT 5 ═══ -->
+<div class="phone-wrap" id="sc5">
+  <div class="phone">
+    <div class="screen s5">
+      <div class="hdr">
+        <div class="hdr-row">
+          <div class="hdr-title">لوحة الأستاذ</div>
+          <div class="notif">🔔</div>
+        </div>
+        <div class="balance-label">أرباحك الإجمالية</div>
+        <div class="balance">12,500 <span>أوقية</span></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-val">24</div>
+          <div class="stat-lbl">جلسة منجزة</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">4.8 ★</div>
+          <div class="stat-lbl">تقييمك</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">3</div>
+          <div class="stat-lbl">طلبات جديدة</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="sec-title">طلبات الجلسات</div>
+        <div class="req-card">
+          <div class="req-icon" style="background:#E6F4F7">📚</div>
+          <div class="req-info">
+            <div class="req-name">مريم بنت أحمد</div>
+            <div class="req-sub">رياضيات · 7D · الأحد 10:00</div>
+          </div>
+          <div class="req-badge new">جديد</div>
+        </div>
+        <div class="req-card">
+          <div class="req-icon" style="background:#D1FAE5">✅</div>
+          <div class="req-info">
+            <div class="req-name">عمر ولد محمد</div>
+            <div class="req-sub">رياضيات · 6C · السبت 15:00</div>
+          </div>
+          <div class="req-badge done">مؤكد</div>
+        </div>
+        <div class="req-card">
+          <div class="req-icon" style="background:#E6F4F7">📚</div>
+          <div class="req-info">
+            <div class="req-name">خديجة ولد سالم</div>
+            <div class="req-sub">رياضيات · 5D · الإثنين 9:00</div>
+          </div>
+          <div class="req-badge new">جديد</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="marketing">
+    <div class="mktg-tag">للأساتذة</div>
+    <div class="mktg-h">أدر طلاّبك<br>وأرباحك بسهولة</div>
+    <div class="mktg-p">استقبل الطلبات · تابع الأرباح<br>وانمِّ مسيرتك التعليمية</div>
+  </div>
+  <button class="dl-btn" onclick="dl('sc5','hessati_screenshot_5')">⬇ تحميل PNG</button>
+</div>
+
+<script>
+async function dl(id, filename) {
+  const el  = document.getElementById(id);
+  const btn = el.querySelector('.dl-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ جارٍ التحميل…';
+  try {
+    const canvas = await html2canvas(el, {
+      scale: 4,
+      useCORS: true,
+      backgroundColor: '#111111',
+      logging: false,
+    });
+    const link = document.createElement('a');
+    link.download = filename + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch(e) {
+    alert('حدث خطأ، حاول مرة أخرى');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '⬇ تحميل PNG';
+  }
+}
+</script>
+
+</body>
+</html>
