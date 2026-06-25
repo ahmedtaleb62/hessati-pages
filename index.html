@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>حصّتي — منصة حجز دروس خصوصية</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: #F8FAFC;
+      color: #1E293B;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: linear-gradient(135deg, #1B6B7A 0%, #0F4C5C 100%);
+      color: #fff;
+      padding: 80px 24px;
+      text-align: center;
+    }
+    header .logo {
+      width: 100px; height: 100px;
+      background: rgba(255,255,255,.15);
+      border-radius: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 52px;
+      margin-bottom: 20px;
+    }
+    header h1 { font-size: 32px; font-weight: 800; margin-bottom: 10px; }
+    header p  { font-size: 16px; color: rgba(255,255,255,.8); max-width: 480px; margin: 0 auto; }
+
+    .links {
+      max-width: 600px;
+      margin: 48px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 480px) { .links { grid-template-columns: 1fr; } }
+
+    .link-card {
+      background: #fff;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      text-decoration: none;
+      color: #1E293B;
+      transition: all .2s;
+    }
+    .link-card:hover {
+      border-color: #1B6B7A;
+      box-shadow: 0 4px 20px rgba(27,107,122,.15);
+      transform: translateY(-2px);
+    }
+    .link-card .icon { font-size: 40px; display: block; margin-bottom: 12px; }
+    .link-card h2   { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: #1B6B7A; }
+    .link-card p    { font-size: 13px; color: #64748B; }
+
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: #94A3B8;
+      border-top: 1px solid #E2E8F0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">📚</div>
+  <h1>حصّتي</h1>
+  <p>منصة حجز دروس خصوصية — تواصل مع أفضل الأساتذة</p>
+</header>
+
+<div class="links">
+  <a href="privacy.html" class="link-card">
+    <span class="icon">🔒</span>
+    <h2>سياسة الخصوصية</h2>
+    <p>كيف نحمي بياناتك ونحافظ على خصوصيتك</p>
+  </a>
+  <a href="support.html" class="link-card">
+    <span class="icon">🎓</span>
+    <h2>الدعم الفني</h2>
+    <p>مركز المساعدة والأسئلة الشائعة</p>
+  </a>
+</div>
+
+<footer>
+  © 2026 حصّتي — جميع الحقوق محفوظة
+</footer>
+
+</body>
+</html>
